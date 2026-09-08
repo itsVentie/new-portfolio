@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import { Header } from './components/Header/Header';
+import { ProfileHeader } from './components/ProfileHeader/ProfileHeader';
 import { Home } from './pages/Home/Home';
 import { About } from './pages/About/About';
 import { Projects } from './pages/Projects/Projects';
@@ -27,6 +28,7 @@ export function App() {
   return (
     <>
       <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+      <ProfileHeader />
       {renderPage()}
     </>
   );
