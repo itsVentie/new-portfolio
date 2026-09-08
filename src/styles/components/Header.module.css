@@ -1,8 +1,8 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: rgba(250, 248, 245, 0.85);
-  backdrop-filter: blur(8px);
+  background-color: rgba(247, 250, 252, 0.85);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   z-index: 100;
 }
@@ -10,7 +10,7 @@
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,26 +18,38 @@
 
 .logo {
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--text-main);
-  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  letter-spacing: -0.01em;
 }
 
 .nav {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .navLink {
-  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
   color: var(--text-muted);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-small);
+  font-size: 0.9rem;
+  font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .navLink:hover {
-  background-color: var(--accent-lavender);
-  color: var(--text-main);
+  background-color: var(--accent-ice);
+  color: var(--accent-text);
+}
+
+.active {
+  background-color: var(--accent-sky);
+  color: var(--accent-text);
 }
