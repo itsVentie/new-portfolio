@@ -7,6 +7,13 @@ interface HeaderProps {
   onNavigate: (page: Page) => void;
 }
 
+const NAV_ITEMS: { id: Page; label: string }[] = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About me' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contacts' },
+];
+
 export function Header({ currentPage, onNavigate }: HeaderProps) {
   return (
     <header className={styles.header}>
@@ -14,39 +21,19 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
         <button 
           onClick={() => onNavigate('home')} 
           className={styles.logo}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
         >
           My portfolio
         </button>
         <nav className={styles.nav}>
-          <button 
-            onClick={() => onNavigate('home')} 
-            className={`${styles.navLink} ${currentPage === 'home' ? styles.active : ''}`}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            Home
-          </button>
-          <button 
-            onClick={() => onNavigate('about')} 
-            className={`${styles.navLink} ${currentPage === 'about' ? styles.active : ''}`}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            About me
-          </button>
-          <button 
-            onClick={() => onNavigate('projects')} 
-            className={`${styles.navLink} ${currentPage === 'projects' ? styles.active : ''}`}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            Projects
-          </button>
-          <button 
-            onClick={() => onNavigate('contact')} 
-            className={`${styles.navLink} ${currentPage === 'contact' ? styles.active : ''}`}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            Contacts
-          </button>
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => onNavigate(item.id)}
+              className={`${styles.navLink} ${currentPage === item.id ? styles.active : ''}`}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
       </div>
     </header>

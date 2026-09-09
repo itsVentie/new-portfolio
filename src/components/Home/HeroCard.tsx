@@ -4,6 +4,8 @@ import styles from '../../styles/Home/HeroCard.module.css';
 
 const DISCORD_ID = '939851605111631903'; 
 
+const GIF_CATEGORIES = ['dance', 'hug', 'wink', 'wave', 'pat', 'cuddle', 'smile', 'sleep'];
+
 interface ActivityDetails {
   name: string;
   details?: string;
@@ -22,6 +24,24 @@ export function HeroCard() {
   const [currentActivity, setCurrentActivity] = useState<ActivityDetails | null>(null);
   const [customStatus, setCustomStatus] = useState<string>('');
   const [elapsedTime, setElapsedTime] = useState<string>('');
+  const [randomGif, setRandomGif] = useState<string>('https://nekos.best/api/v2/dance/0001.gif');
+
+  useEffect(() => {
+    async function fetchRandomGif() {
+      try {
+        const randomCategory = GIF_CATEGORIES[Math.floor(Math.random() * GIF_CATEGORIES.length)];
+        const res = await fetch(`https://nekos.best/api/v2/${randomCategory}`);
+        const data = await res.json();
+        if (data.results && data.results.length > 0) {
+          setRandomGif(data.results[0].url);
+        }
+      } catch (err) {
+        console.error('Failed to fetch random anime gif:', err);
+      }
+    }
+
+    fetchRandomGif();
+  }, []);
 
   useEffect(() => {
     async function fetchLanyard() {
@@ -126,8 +146,8 @@ export function HeroCard() {
       <div className={styles.splitGrid}>
         <div className={styles.visualCard}>
           <img 
-            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjc3eHU5cDdxb3FsbnMwZGthY3FiNWM4eXRueWN2amRzYTJmeTB3MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zgrA0dZOHFzzkBmKe2/giphy.gif" 
-            alt="Cozy Anime Vibes" 
+            src={randomGif} 
+            alt="Anime GIF" 
             className={styles.bgGif}
           />
         </div>

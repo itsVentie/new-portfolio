@@ -1,16 +1,17 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: rgba(247, 250, 252, 0.85);
-  backdrop-filter: blur(10px);
+  background-color: var(--header-bg, rgba(255, 255, 255, 0.82));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   z-index: 100;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1020px; 
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,18 +19,24 @@
 
 .logo {
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-main);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   letter-spacing: -0.01em;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.75;
 }
 
 .nav {
   display: flex;
   gap: 0.35rem;
+  align-items: center;
 }
 
 .navLink {
@@ -37,19 +44,20 @@
   border: none;
   cursor: pointer;
   color: var(--text-muted);
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-small);
-  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-small, 6px);
+  font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .navLink:hover {
-  background-color: var(--accent-ice);
-  color: var(--accent-text);
+  background-color: var(--accent-ice, rgba(0, 0, 0, 0.04));
+  color: var(--text-main);
 }
 
 .active {
   background-color: var(--accent-sky);
   color: var(--accent-text);
+  font-weight: 600;
 }
