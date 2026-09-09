@@ -7,12 +7,24 @@ interface TrackInfo {
   artist: string;
   album?: string;
   coverUrl?: string;
+  timestamps?: {
+    start: number;
+    end: number;
+  };
 }
 
 const DISCORD_USER_ID = '939851605111631903';
 
+const formatTime = (ms: number) => {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
+
 export function MusicCard() {
   const [track, setTrack] = useState<TrackInfo | null>(null);
+  const [progress, setProgress] = useState<{ current: number; duration: number } | null>(null);
 
   const parseLanyardData = (data: any): TrackInfo | null => {
     if (!data) return null;
@@ -23,6 +35,7 @@ export function MusicCard() {
         artist: data.spotify.artist,
         album: data.spotify.album,
         coverUrl: data.spotify.album_art_url,
+        timestamps: data.spotify.timestamps,
       };
     }
 
@@ -45,6 +58,7 @@ export function MusicCard() {
           artist: ytmActivity.state || 'YouTube Music',
           album: ytmActivity.assets?.large_text || 'YouTube Music',
           coverUrl: cover,
+          timestamps: ytmActivity.timestamps,
         };
       }
     }
@@ -91,9 +105,7 @@ export function MusicCard() {
         if (message.t === 'INIT_STATE' || message.t === 'PRESENCE_UPDATE') {
           setTrack(parseLanyardData(message.d));
         }
-      } catch (err) {
-
-      }
+      } catch (err) {}
     };
 
     return () => {
@@ -104,7 +116,36 @@ export function MusicCard() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!track?.timestamps) {
+      setProgress(null);
+      return;
+    }
+
+    const updateProgress = () => {
+      const now = Date.now();
+      const { start, end } = track.timestamps!;
+      const current = Math.max(0, now - start);
+      const duration = Math.max(0, end - start);
+
+      if (current > duration) {
+        setProgress({ current: duration, duration });
+      } else {
+        setProgress({ current, duration });
+      }
+    };
+
+    updateProgress();
+    const timer = setInterval(updateProgress, 1000);
+
+    return () => clearInterval(timer);
+  }, [track]);
+
   if (!track) return null;
+
+  const progressPercent = progress && progress.duration > 0 
+    ? Math.min(100, (progress.current / progress.duration) * 100) 
+    : 0;
 
   return (
     <section className={homeStyles.card}>
@@ -127,6 +168,21 @@ export function MusicCard() {
           <span className={musicStyles.trackTitle}>{track.title}</span>
           <span className={musicStyles.trackArtist}>{track.artist}</span>
           {track.album && <span className={musicStyles.trackAlbum}>{track.album}</span>}
+
+          {progress && (
+            <div className={musicStyles.progressContainer}>
+              <div className={musicStyles.progressBar}>
+                <div 
+                  className={musicStyles.progressFill} 
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+              <div className={musicStyles.timeInfo}>
+                <span>{formatTime(progress.current)}</span>
+                <span>{formatTime(progress.duration)}</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
