@@ -9,20 +9,6 @@ const ExternalLinkIcon = () => (
   </svg>
 );
 
-const ShieldCheckIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    <path d="m9 12 2 2 4-4" />
-  </svg>
-);
-
-const TerminalIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="4 17 10 11 4 5" />
-    <line x1="12" y1="19" x2="20" y2="19" />
-  </svg>
-);
-
 const TelegramIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.834 7.424l-2.02 9.518c-.15.676-.55.842-1.118.523l-3.08-2.27-1.486 1.432c-.164.164-.303.303-.62.303l.22-3.13 5.7-5.15c.248-.22-.054-.342-.386-.12l-7.045 4.436-3.04-.95c-.662-.207-.676-.662.14-.982l11.88-4.58c.55-.2 1.03.13.815.97z"/>
@@ -60,7 +46,7 @@ export function ProfileHeader() {
             <div className={styles.nameRow}>
               <h1 className={styles.name}>Systems & Security Engineer</h1>
               <span className={styles.username}>
-                <ShieldCheckIcon /> @Ventie
+                @Ventie
               </span>
             </div>
             <p className={styles.role}>
@@ -74,20 +60,20 @@ export function ProfileHeader() {
             <span className={`${styles.boxBadge} ${styles.badgeLavender}`}>Stack</span>
             <div className={styles.stackList}>
               <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elixir/elixir-original.svg" alt="Elixir" width="14" height="14" />
-                Elixir
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="14" height="14" />
+                C++
               </span>
               <span className={styles.stackItem}>
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" alt="Rust" width="14" height="14" className={styles.rustIcon} />
                 Rust
               </span>
               <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/julia/julia-original.svg" alt="Julia" width="14" height="14" />
-                Julia
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Golang" width="14" height="14" />
+                Golang
               </span>
               <span className={styles.stackItem}>
-                <TerminalIcon />
-                EVM
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="14" height="14" />
+                Python
               </span>
             </div>
           </div>
