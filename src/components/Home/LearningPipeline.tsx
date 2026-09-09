@@ -4,6 +4,7 @@ import pipelineStyles from '../../styles/Home/LearningPipeline.module.css';
 
 const GITHUB_USERNAME = 'itsVentie';
 const REPO_NAME = 'roadmap';
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 interface Task {
   id: number;
@@ -22,8 +23,16 @@ export function LearningPipeline() {
   useEffect(() => {
     async function fetchGitHubIssues() {
       try {
+        const headers: Record<string, string> = {
+          Accept: 'application/vnd.github.v3+json'
+        };
+
+        if (GITHUB_TOKEN) {
+          headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+        }
+
         const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/issues?state=all&per_page=100`, {
-          headers: { Accept: 'application/vnd.github.v3+json' }
+          headers
         });
 
         if (!res.ok) throw new Error('Failed to fetch issues');
@@ -44,7 +53,7 @@ export function LearningPipeline() {
                 isMain,
                 completed: issue.state === 'closed',
                 phase: phaseLabel.replace('phase:', '').trim(),
-                htmlUrl: issue.html_url 
+                htmlUrl: issue.html_url
               };
             });
 
@@ -82,17 +91,15 @@ export function LearningPipeline() {
             <div style={{ color: '#8b949e', fontSize: '0.85rem', padding: '8px 0' }}>No active tasks in roadmap.</div>
           ) : (
             mainTasks.map((task, index) => (
-              <a 
+              <div 
                 key={task.id} 
-                href={task.htmlUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
+                onClick={() => window.open(task.htmlUrl, '_blank')}
                 className={pipelineStyles.step}
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                style={{ cursor: 'pointer' }}
               >
                 <span className={pipelineStyles.stepNum}>0{index + 1}</span>
                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{task.title}</span>
-              </a>
+              </div>
             ))
           )}
         </div>
@@ -114,13 +121,11 @@ export function LearningPipeline() {
                 </div>
               ) : (
                 tasks.map(task => (
-                  <a 
+                  <div 
                     key={task.id} 
-                    href={task.htmlUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => window.open(task.htmlUrl, '_blank')}
                     className={pipelineStyles.taskItem}
-                    style={{ textDecoration: 'none' }}
+                    style={{ cursor: 'pointer' }}
                   >
                     <input 
                       type="checkbox" 
@@ -132,7 +137,7 @@ export function LearningPipeline() {
                       {task.title}
                     </div>
                     <span className={pipelineStyles.phaseBadge}>{task.phase}</span>
-                  </a>
+                  </div>
                 ))
               )}
             </div>
