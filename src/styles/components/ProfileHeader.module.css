@@ -1,30 +1,32 @@
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 2rem auto 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
 }
 
 .card {
+  position: relative;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-main, 16px);
   padding: 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; 
   gap: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  width: 100%;
 }
 
 .leftColumn {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.25rem;
 }
 
 .avatarWrapper {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
 
@@ -88,15 +90,13 @@
   margin: 0.1rem 0 0 0;
   font-size: 0.875rem;
   color: var(--text-muted);
-  max-width: 280px;
+  max-width: 400px;
   line-height: 1.4;
 }
 
 .boxesGroup {
   display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  width: 280px;
+  gap: 1.25rem;
   flex-shrink: 0;
 }
 
@@ -105,16 +105,17 @@
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 1.25rem 1rem 0.85rem 1rem;
+  padding: 1.4rem 1rem 1rem 1rem; 
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 210px;
+  margin-top: 0.25rem;
 }
 
 .boxBadge {
   position: absolute;
-  top: -10px;
+  top: -9px;
   left: 12px;
   font-size: 0.65rem;
   font-weight: 600;
@@ -195,7 +196,7 @@
   filter: invert(1);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 950px) {
   .card {
     flex-direction: column;
     align-items: flex-start;
@@ -204,6 +205,11 @@
   
   .boxesGroup {
     width: 100%;
+    flex-direction: column;
+  }
+
+  .box {
+    width: 100%;
   }
 }
 
@@ -211,7 +217,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   flex-wrap: wrap;
 }
 

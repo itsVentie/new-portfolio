@@ -1,7 +1,7 @@
 .container {
-  max-width: 800px;
-  margin: 1.5rem auto 3rem auto;
-  padding: 0 1.5rem;
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -11,19 +11,19 @@
 .floatingSidebar {
   position: absolute;
   top: 0;
-  left: calc(100% + 1.5rem); 
-  width: 180px;
+  left: calc(100% + 2rem); 
+  width: 200px;
   display: flex;
   flex-direction: column;
 }
 
 .tocCard {
   position: sticky;
-  top: 1.5rem;
+  top: 2rem;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-main);
-  padding: 1.15rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -63,12 +63,41 @@
   transform: translateX(3px);
 }
 
-.sectionAnchor {
-  scroll-margin-top: 1.5rem;
-  display: contents;
+.tocLink.active {
+  color: var(--text-main, #ffffff);
+  font-weight: 600;
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-left: 3px solid var(--accent-sky, #38bdf8); 
+  padding-left: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 1180px) {
+.sectionAnchor {
+  scroll-margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionAnchor > * {
+  height: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sectionAnchor.activeSection > * {
+  border-color: var(--accent-sky, #38bdf8) !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.spanThree {
+  grid-column: span 3;
+}
+
+.spanTwo {
+  grid-column: span 2;
+}
+
+@media (max-width: 1450px) {
   .floatingSidebar {
     display: none;
   }
@@ -121,12 +150,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-}
-
-.spanTwo {
-  grid-column: span 2;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
 .card {
@@ -139,6 +165,7 @@
   flex-direction: column;
   justify-content: flex-start;
   transition: border-color 0.2s ease, transform 0.2s ease;
+  height: 100%;
 }
 
 .cardTitle {
@@ -283,6 +310,15 @@
   transform: translateY(0);
 }
 
+@media (max-width: 1150px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .spanThree {
+    grid-column: span 2;
+  }
+}
+
 @media (max-width: 650px) {
   .container {
     padding: 0 1rem;
@@ -297,7 +333,7 @@
     grid-template-columns: 1fr;
   }
 
-  .spanTwo {
+  .spanTwo, .spanThree {
     grid-column: span 1;
   }
 

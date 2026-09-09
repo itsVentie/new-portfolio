@@ -37,6 +37,13 @@ const PROJECTS_CONFIG: ProjectConfig[] = [
     fallbackDescription: 'Desktop application designed for real-time video stream manipulation and face swapping. Built with a systems-first approach, it decouples the native GUI and processing pipeline from the heavy machine-learning inference engine.',
     fallbackLanguage: 'Rust',
   },
+  {
+    id: 'Latch',
+    repo: 'itsVentie/Latch',
+    status: 'Active',
+    fallbackDescription: 'Lightweight hybrid post-quantum proxy tunneling legacy traffic using X25519 and ML-KEM-768 (FIPS 203).',
+    fallbackLanguage: 'Go',
+  },
 ];
 
 const CACHE_KEY = 'github_data_cache_v1';

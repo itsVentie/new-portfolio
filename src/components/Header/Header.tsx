@@ -1,6 +1,6 @@
 import styles from '../../styles/components/Header.module.css';
 
-type Page = 'home' | 'about' | 'projects' | 'contact';
+type Page = 'home' | 'about' | 'projects' | 'download' | 'contact';
 
 interface HeaderProps {
   currentPage: Page;
@@ -11,6 +11,7 @@ const NAV_ITEMS: { id: Page; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About me' },
   { id: 'projects', label: 'Projects' },
+  { id: 'download', label: 'Download' },
   { id: 'contact', label: 'Contacts' },
 ];
 
