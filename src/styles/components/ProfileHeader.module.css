@@ -206,3 +206,47 @@
     width: 100%;
   }
 }
+
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.wakatimeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.wakatimeBadge:hover {
+  color: var(--accent-text, #0369a1);
+  background-color: var(--accent-sky, #e0f2fe);
+  border-color: var(--accent-sky, #e0f2fe);
+}

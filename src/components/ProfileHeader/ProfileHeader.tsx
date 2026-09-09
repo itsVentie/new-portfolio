@@ -9,6 +9,13 @@ const ExternalLinkIcon = () => (
   </svg>
 );
 
+const BriefcaseIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  </svg>
+);
+
 const TelegramIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.834 7.424l-2.02 9.518c-.15.676-.55.842-1.118.523l-3.08-2.27-1.486 1.432c-.164.164-.303.303-.62.303l.22-3.13 5.7-5.15c.248-.22-.054-.342-.386-.12l-7.045 4.436-3.04-.95c-.662-.207-.676-.662.14-.982l11.88-4.58c.55-.2 1.03.13.815.97z"/>
@@ -32,7 +39,7 @@ export function ProfileHeader() {
           <div className={styles.avatarWrapper}>
             {!hasError ? (
               <img 
-                src="https://unavatar.io/telegram/ventie" 
+                src="https://github.com/itsVentie.png"
                 alt="Ventie avatar"
                 className={styles.avatarImg}
                 onError={() => setHasError(true)}
@@ -52,6 +59,24 @@ export function ProfileHeader() {
             <p className={styles.role}>
               EVM Mempool Inspection, Distributed Architectures & Forensics
             </p>
+
+            <div className={styles.statsRow}>
+              <span className={styles.statBadge}>
+                <BriefcaseIcon />
+                <span>5+ yrs experience</span>
+              </span>
+              <a 
+                href="https://wakatime.com/@Ventie" 
+                target="_blank" 
+                rel="noreferrer" 
+                className={styles.wakatimeBadgeImg}
+              >
+                <img 
+                  src="https://wakatime.com/badge/user/0be43041-4b4c-455a-989e-bc8a809cf10e.svg" 
+                  alt="WakaTime Stats" 
+                />
+              </a>
+            </div>
           </div>
         </div>
 
