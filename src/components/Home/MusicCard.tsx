@@ -55,7 +55,7 @@ export function MusicCard() {
   useEffect(() => {
     if (!DISCORD_USER_ID) return;
 
-    let heartbeatTimer: NodeJS.Timeout | null = null;
+    let heartbeatTimer: ReturnType<typeof setInterval> | null = null;
 
     fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`)
       .then((res) => res.json())

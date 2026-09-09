@@ -7,7 +7,7 @@
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-main);
+  border-radius: var(--radius-main, 16px);
   padding: 2rem;
   display: flex;
   justify-content: space-between;
@@ -23,8 +23,8 @@
 }
 
 .avatarWrapper {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
 }
 
@@ -34,13 +34,13 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--card-bg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .avatarFallback {
-  background-color: var(--accent-sky);
-  color: var(--accent-text);
+  background-color: var(--accent-sky, #e0f2fe);
+  color: var(--accent-text, #0369a1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,9 +55,16 @@
   gap: 0.35rem;
 }
 
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
 .name {
   margin: 0;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-main);
   letter-spacing: -0.01em;
@@ -65,12 +72,14 @@
 }
 
 .username {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--accent-text);
-  background-color: var(--accent-sky);
-  padding: 0.15rem 0.5rem;
+  color: var(--accent-text, #0369a1);
+  background-color: var(--accent-sky, #e0f2fe);
+  padding: 0.2rem 0.5rem;
   border-radius: 6px;
   line-height: 1;
 }
@@ -79,14 +88,16 @@
   margin: 0.1rem 0 0 0;
   font-size: 0.875rem;
   color: var(--text-muted);
-  max-width: 260px;
+  max-width: 280px;
   line-height: 1.4;
 }
 
 .boxesGroup {
   display: flex;
-  align-items: stretch;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 280px;
+  flex-shrink: 0;
 }
 
 .box {
@@ -94,63 +105,104 @@
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 1.25rem 1rem 1rem 1rem;
+  padding: 1.25rem 1rem 0.85rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 85px;
+  width: 100%;
 }
 
+.boxBadge {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.badgeLavender {
+  background-color: var(--accent-lavender, #f3e8ff);
+  color: var(--accent-lavender-text, #6b21a8);
+  border: 1px solid rgba(107, 33, 168, 0.12);
+}
+
+.badgeSky {
+  background-color: var(--accent-sky, #e0f2fe);
+  color: var(--accent-text, #0369a1);
+  border: 1px solid rgba(3, 105, 161, 0.12);
+}
 
 .stackList {
-  display: flex;
-  gap: 0.35rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 170px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  width: 100%;
 }
 
 .stackItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.25rem 0.55rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 6px;
   font-size: 0.775rem;
   font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .socials {
-  display: flex;
-  gap: 0.35rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  width: 100%;
 }
 
 .socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   color: var(--text-main);
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 0.25rem 0.55rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 6px;
   font-size: 0.775rem;
   text-decoration: none;
   font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
   transition: all 0.2s ease;
 }
 
 .socialLink:hover {
-  background-color: var(--accent-sky);
-  color: var(--accent-text);
-  border-color: var(--accent-sky);
+  background-color: var(--accent-sky, #e0f2fe);
+  color: var(--accent-text, #0369a1);
+  border-color: var(--accent-sky, #e0f2fe);
+}
+
+[data-theme='dark'] .rustIcon {
+  filter: invert(1);
 }
 
 @media (max-width: 720px) {
   .card {
     flex-direction: column;
     align-items: flex-start;
+    padding: 1.5rem;
   }
+  
   .boxesGroup {
     width: 100%;
-    flex-wrap: wrap;
   }
 }
