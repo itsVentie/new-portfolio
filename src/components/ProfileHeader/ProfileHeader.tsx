@@ -57,7 +57,7 @@ export function ProfileHeader() {
               </span>
             </div>
             <p className={styles.role}>
-              EVM Mempool Inspection, Distributed Architectures & Forensics
+              Hello dear! We don't know anything, we're just larping. Oka-aay, scene is over!
             </p>
 
             <div className={styles.statsRow}>
