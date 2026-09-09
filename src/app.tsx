@@ -6,7 +6,7 @@ import { About } from './pages/About/About';
 import { Projects } from './pages/Projects/Projects';
 import { Contact } from './pages/Contact/Contact';
 
-type Page = 'home' | 'about' | 'projects' | 'contact';
+type Page = 'home' | 'about' | 'projects' | 'contact' | 'download';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -27,7 +27,7 @@ export function App() {
 
   return (
     <>
-      <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+      <Header currentPage={currentPage} onNavigate={(page) => setCurrentPage(page)} />
       <ProfileHeader />
       {renderPage()}
     </>
