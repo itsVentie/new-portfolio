@@ -4,6 +4,7 @@ import styles from '../../styles/Home/HeroCard.module.css';
 
 const DISCORD_ID = '939851605111631903';
 const GITHUB_USERNAME = 'itsVentie';
+const GITHUB_TOKEN = (import.meta as any).env?.VITE_GITHUB_TOKEN || '';
 
 const GIF_CATEGORIES = ['dance', 'hug', 'wink', 'wave', 'pat', 'cuddle', 'smile', 'sleep'];
 
@@ -35,6 +36,7 @@ export function HeroCard() {
   const [randomGif, setRandomGif] = useState<string>('https://nekos.best/api/v2/dance/0001.gif');
   const [recentCommits, setRecentCommits] = useState<CommitStat[]>([]);
   const [commitsLoading, setCommitsLoading] = useState<boolean>(true);
+  const [commitError, setCommitError] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchRandomGif() {
@@ -55,9 +57,9 @@ export function HeroCard() {
 
   useEffect(() => {
     async function fetchRecentCommits() {
-      const CACHE_KEY = 'github_recent_commits_v3';
-      const CACHE_TIME_KEY = 'github_recent_commits_time_v3';
-      const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+      const CACHE_KEY = 'github_api_commits_v2';
+      const CACHE_TIME_KEY = 'github_api_commits_time_v2';
+      const CACHE_TTL = 15 * 60 * 1000;
 
       const cachedData = localStorage.getItem(CACHE_KEY);
       const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
@@ -74,43 +76,66 @@ export function HeroCard() {
 
       try {
         setCommitsLoading(true);
-        // Используем Events API — всего 1 запрос вместо N запросов по репозиториям
-        const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public`);
-        if (!res.ok) throw new Error(`GitHub API Error: ${res.status}`);
+        setCommitError(false);
 
-        const events = await res.json();
-        const pushEvents = events.filter((e: any) => e.type === 'PushEvent');
-
-        const commits: CommitStat[] = [];
-        for (const event of pushEvents) {
-          const repoFullName = event.repo.name; // формат "owner/repo"
-          const repoName = repoFullName.includes('/') ? repoFullName.split('/')[1] : repoFullName;
-          const date = event.created_at;
-
-          if (event.payload && event.payload.commits) {
-            for (const commit of event.payload.commits) {
-              commits.push({
-                repoName,
-                message: commit.message.split('\n')[0],
-                date,
-                url: `https://github.com/${repoFullName}/commit/${commit.sha}`,
-              });
-            }
-          }
+        const headers: Record<string, string> = {
+          'Accept': 'application/vnd.github+json',
+        };
+        if (GITHUB_TOKEN) {
+          headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
         }
 
-        const sortedCommits = commits
+        const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`, { headers });
+        
+        if (!reposRes.ok) {
+          throw new Error(`GitHub API Error: ${reposRes.status}`);
+        }
+
+        const repos = await reposRes.json();
+        if (!Array.isArray(repos)) {
+          throw new Error('Invalid response from GitHub');
+        }
+
+        let allCommits: CommitStat[] = [];
+
+        for (const repo of repos) {
+          try {
+            const commitsRes = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/commits?per_page=3`, { headers });
+            if (commitsRes.ok) {
+              const repoCommits = await commitsRes.json();
+              if (Array.isArray(repoCommits)) {
+                for (const commit of repoCommits) {
+                  allCommits.push({
+                    repoName: repo.name,
+                    message: commit.commit.message.split('\n')[0],
+                    date: commit.commit.author?.date || commit.commit.committer?.date || new Date().toISOString(),
+                    url: commit.html_url,
+                  });
+                }
+              }
+            }
+          } catch {}
+        }
+
+        const sortedCommits = allCommits
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, 3);
 
-        localStorage.setItem(CACHE_KEY, JSON.stringify(sortedCommits));
-        localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
-
-        setRecentCommits(sortedCommits);
+        if (sortedCommits.length > 0) {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(sortedCommits));
+          localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+          setRecentCommits(sortedCommits);
+        } else {
+          setRecentCommits([]);
+        }
       } catch (err) {
-        console.error('Error fetching recent commits:', err);
+        console.error('Error fetching commits:', err);
+        setCommitError(true);
         if (cachedData) {
-          setRecentCommits(JSON.parse(cachedData));
+          try {
+            setRecentCommits(JSON.parse(cachedData));
+            setCommitError(false);
+          } catch {}
         }
       } finally {
         setCommitsLoading(false);
@@ -232,6 +257,7 @@ export function HeroCard() {
   return (
     <section className={`${profileStyles.card} ${styles.heroCard}`}>
       <div className={styles.splitGrid}>
+        
         <div className={styles.visualCard}>
           <img 
             src={randomGif} 
@@ -272,14 +298,18 @@ export function HeroCard() {
               </div>
             )}
           </div>
+        </div>
 
-          <div className={styles.socialBlock}>
+        <div className={styles.socialBlock}>
+          <div>
             <span className={styles.label}>Recent Commits</span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
+            <div className={styles.commitsList}>
               {commitsLoading ? (
-                <div style={{ fontSize: '12px', opacity: 0.6 }}>Loading recent commits...</div>
+                <div className={styles.commitState}>Loading recent commits...</div>
+              ) : commitError && recentCommits.length === 0 ? (
+                <div className={styles.commitState} style={{ color: '#ef4444' }}>Failed to load commits</div>
               ) : recentCommits.length === 0 ? (
-                <div style={{ fontSize: '12px', opacity: 0.6 }}>No recent commits found.</div>
+                <div className={styles.commitState}>No recent commits found.</div>
               ) : (
                 recentCommits.map((commit, index) => (
                   <a
@@ -287,23 +317,13 @@ export function HeroCard() {
                     href={commit.url}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      padding: '8px 10px',
-                      background: 'rgba(255, 255, 255, 0.03)',
-                      borderRadius: '8px',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      border: '1px solid rgba(255, 255, 255, 0.05)',
-                      transition: 'background 0.2s ease',
-                    }}
+                    className={styles.commitItem}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: '600', opacity: 0.9 }}>{commit.repoName}</span>
-                      <span style={{ fontSize: '10px', opacity: 0.5 }}>{formatTimeAgo(commit.date)}</span>
+                    <div className={styles.commitHeader}>
+                      <span className={styles.commitRepo}>{commit.repoName}</span>
+                      <span className={styles.commitDate}>{formatTimeAgo(commit.date)}</span>
                     </div>
-                    <span style={{ fontSize: '11px', opacity: 0.7, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <span className={styles.commitMessage}>
                       {commit.message}
                     </span>
                   </a>
@@ -312,6 +332,7 @@ export function HeroCard() {
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

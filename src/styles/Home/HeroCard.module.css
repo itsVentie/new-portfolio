@@ -11,11 +11,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .splitGrid {
-    grid-template-columns: 1.6fr 1fr;
+    grid-template-columns: 0.9fr 1fr 1fr;
     align-items: stretch;
   }
 }
@@ -23,11 +24,12 @@
 .visualCard {
   position: relative;
   width: 100%;
-  min-height: 280px; 
+  min-height: 260px;
   height: 100%;
+  align-self: stretch;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e2e8f0;
 }
 
 .bgGif {
@@ -40,7 +42,8 @@
   display: block;
 }
 
-.infoContent {
+.infoContent,
+.socialBlock {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -54,11 +57,6 @@
 }
 
 .statusBlock {
-  display: flex;
-  flex-direction: column;
-}
-
-.socialBlock {
   display: flex;
   flex-direction: column;
 }
@@ -160,4 +158,59 @@
   border-radius: 8px;
   padding: 0.75rem;
   font-family: monospace;
+}
+
+.commitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.commitItem {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.commitItem:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.commitHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.commitRepo {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.commitDate {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.commitMessage {
+  font-size: 11px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commitState {
+  font-size: 12px;
+  color: #64748b;
 }
