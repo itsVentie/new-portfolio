@@ -11,6 +11,7 @@ interface Task {
   isMain: boolean;
   completed: boolean;
   phase: string;
+  htmlUrl: string;
 }
 
 export function LearningPipeline() {
@@ -42,7 +43,8 @@ export function LearningPipeline() {
                 title: issue.title,
                 isMain,
                 completed: issue.state === 'closed',
-                phase: phaseLabel.replace('phase:', '').trim()
+                phase: phaseLabel.replace('phase:', '').trim(),
+                htmlUrl: issue.html_url 
               };
             });
 
@@ -64,7 +66,7 @@ export function LearningPipeline() {
     <>
       <section className={styles.card}>
         <div className={pipelineStyles.headerRow}>
-          <h2 className={styles.cardTitle}>Up Next & Roadmap</h2>
+          <h2 className={styles.cardTitle}>Roadmap</h2>
           <button 
             onClick={() => setIsModalOpen(true)}
             className={pipelineStyles.viewAllBtn}
@@ -77,13 +79,20 @@ export function LearningPipeline() {
           {loading ? (
             <div style={{ color: '#8b949e', fontSize: '0.85rem', padding: '8px 0' }}>Loading roadmap...</div>
           ) : mainTasks.length === 0 ? (
-            <div style={{ color: '#8b949e', fontSize: '0.85rem', padding: '8px 0' }}>No active primary tasks in roadmap.</div>
+            <div style={{ color: '#8b949e', fontSize: '0.85rem', padding: '8px 0' }}>No active tasks in roadmap.</div>
           ) : (
             mainTasks.map((task, index) => (
-              <div key={task.id} className={pipelineStyles.step}>
+              <a 
+                key={task.id} 
+                href={task.htmlUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={pipelineStyles.step}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
                 <span className={pipelineStyles.stepNum}>0{index + 1}</span>
-                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{task.title}</span>
-              </div>
+                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{task.title}</span>
+              </a>
             ))
           )}
         </div>
@@ -94,7 +103,7 @@ export function LearningPipeline() {
           <div className={pipelineStyles.modalContent} onClick={e => e.stopPropagation()}>
             
             <div className={pipelineStyles.modalHeader}>
-              <h3 style={{ margin: 0, fontSize: '1rem', color: '#e6edf3' }}>Full Engineering Roadmap</h3>
+              <h3 style={{ margin: 0, fontSize: '1rem', color: '#e6edf3' }}>Full Roadmap</h3>
               <button onClick={() => setIsModalOpen(false)} className={pipelineStyles.closeBtn}>✕</button>
             </div>
 
@@ -105,7 +114,14 @@ export function LearningPipeline() {
                 </div>
               ) : (
                 tasks.map(task => (
-                  <div key={task.id} className={pipelineStyles.taskItem}>
+                  <a 
+                    key={task.id} 
+                    href={task.htmlUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={pipelineStyles.taskItem}
+                    style={{ textDecoration: 'none' }}
+                  >
                     <input 
                       type="checkbox" 
                       checked={task.completed} 
@@ -116,7 +132,7 @@ export function LearningPipeline() {
                       {task.title}
                     </div>
                     <span className={pipelineStyles.phaseBadge}>{task.phase}</span>
-                  </div>
+                  </a>
                 ))
               )}
             </div>
