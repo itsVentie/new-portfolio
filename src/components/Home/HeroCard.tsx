@@ -155,7 +155,7 @@ export function HeroCard() {
         <div className={styles.infoContent}>
           <div className={styles.statusBlock}>
             <div className={styles.headerRow}>
-              <span className={styles.label}>DISCORD ACTIVITY</span>
+              <span className={styles.label}>Discord Activity</span>
               <div className={styles.statusIndicator}>
                 <span className={`${styles.pulseDot} ${styles[discordStatus]}`} />
                 <span className={styles.statusText}>{discordStatus.toUpperCase()}</span>
