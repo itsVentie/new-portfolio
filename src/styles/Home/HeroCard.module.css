@@ -53,6 +53,16 @@
   box-sizing: border-box;
 }
 
+.statusBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialBlock {
+  display: flex;
+  flex-direction: column;
+}
+
 .headerRow {
   display: flex;
   justify-content: space-between;
@@ -80,8 +90,8 @@
   flex-shrink: 0;
 }
 
-.pulseDot.online { background-color: #22c55e; }
-.pulseDot.idle { background-color: #eab308; }
+.pulseDot.online { background-color: #00531f; }
+.pulseDot.idle { background-color: #695107; }
 .pulseDot.dnd { background-color: #ef4444; }
 .pulseDot.offline { background-color: #94a3b8; }
 
@@ -150,31 +160,4 @@
   border-radius: 8px;
   padding: 0.75rem;
   font-family: monospace;
-}
-
-.socialGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-
-.socialCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.55rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #334155;
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.socialCard:hover {
-  border-color: #cbd5e1;
-  background: #f1f5f9;
-  color: #0f172a;
 }

@@ -10,9 +10,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>Systems & Low-Level Sec</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusCore}`}>
-              Core Focus
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: Systems Engineer</span>
           <p className={focusStyles.techList}>
@@ -23,9 +20,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>Applied Cryptography</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusActive}`}>
-              Active R&D
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: Applied Cryptographer</span>
           <p className={focusStyles.techList}>
@@ -36,9 +30,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>DFIR & Digital Forensics</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusTarget}`}>
-              Career Target
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: DFIR / Cybercrime Analyst</span>
           <p className={focusStyles.techList}>
@@ -49,9 +40,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>Mathematics & AI Safety</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusProgress}`}>
-              In Progress
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: AI Safety Researcher</span>
           <p className={focusStyles.techList}>
@@ -62,9 +50,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>Cloud Native & DevSecOps</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusExpanding}`}>
-              Expanding
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: DevSecOps Engineer</span>
           <p className={focusStyles.techList}>
@@ -75,9 +60,6 @@ export function CurrentFocus() {
         <div className={focusStyles.focusItem}>
           <div className={focusStyles.focusHeader}>
             <span className={focusStyles.domainName}>Embedded & Hardware Sec</span>
-            <span className={`${focusStyles.statusBadge} ${focusStyles.statusExploratory}`}>
-              Exploratory
-            </span>
           </div>
           <span className={focusStyles.targetRole}>Role: Embedded Security Engineer</span>
           <p className={focusStyles.techList}>

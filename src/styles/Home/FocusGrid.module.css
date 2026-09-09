@@ -40,12 +40,7 @@
   line-height: 1.4;
 }
 
-.statusBadge {
-  font-size: 0.675rem;
-  font-weight: 600;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-}
+
 
 .statusCore {
   background-color: rgba(239, 68, 68, 0.15);
