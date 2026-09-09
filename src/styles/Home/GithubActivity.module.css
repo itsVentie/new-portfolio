@@ -1,0 +1,103 @@
+.githubBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.ghHeaderTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contribCount {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.contribContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.contribScrollWrapper {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.contribGrid {
+  display: flex;
+  gap: 3px;
+  width: max-content;
+}
+
+.contribWeek {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contribDay {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background-color: #161b22;
+  border: 1px solid rgba(27, 31, 35, 0.06);
+}
+
+.level0 { background-color: #161b22; border-color: #30363d; }
+.level1 { background-color: #0e4429; border-color: #003d16; }
+.level2 { background-color: #006d32; border-color: #005626; }
+.level3 { background-color: #26a641; border-color: #1f883d; }
+.level4 { background-color: #39d353; border-color: #2ea043; }
+
+.contribLoading {
+  font-size: 0.8rem;
+  color: #8b949e;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-family: monospace;
+}
+
+.contribFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.githubProfileLink {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.githubProfileLink:hover {
+  text-decoration: underline;
+}
+
+.contribLegend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendLabel {
+  font-size: 0.7rem;
+  color: #8b949e;
+  margin: 0 2px;
+}
