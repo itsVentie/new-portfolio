@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'preact/hooks';
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Home/Home.module.css';
 
 interface LanguageStat {
   name: string;
@@ -115,7 +115,6 @@ export function LanguagesBalance() {
 
   return (
     <section className={styles.card}>
-      <span className={`${styles.boxBadge} ${styles.badgeMint}`}>Languages Balance</span>
       <h2 className={styles.cardTitle}>Code Distribution</h2>
 
       {loading ? (

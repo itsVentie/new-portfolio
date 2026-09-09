@@ -1,0 +1,247 @@
+.container {
+  max-width: 800px;
+  margin: 1.5rem auto 3rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heroCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-main);
+  padding: 2.25rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.heroCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--accent-sky);
+  color: var(--accent-text);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.spanTwo {
+  grid-column: span 2;
+}
+
+.card {
+  position: relative;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-main);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 1rem 0; 
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list li::marker {
+  color: var(--accent-azure, var(--text-muted));
+}
+
+.langBars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.langItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.langInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.barTrack {
+  width: 100%;
+  height: 6px;
+  background-color: var(--bg-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gridTags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolChip {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  line-height: 1.4;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.toolChip strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.toolChip:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.pipelineSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.stepNum {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  background-color: var(--accent-sky);
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+
+.githubBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.githubBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.825rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.githubBtn:hover {
+  background-color: var(--accent-sky);
+  color: var(--accent-text);
+  border-color: var(--accent-azure);
+  transform: translateY(-1px);
+}
+
+.githubBtn:active {
+  transform: translateY(0);
+}
+
+
+@media (max-width: 650px) {
+  .container {
+    padding: 0 1rem;
+    margin: 1rem auto 2rem auto;
+  }
+
+  .heroCard {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spanTwo {
+    grid-column: span 1;
+  }
+
+  .githubBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .githubBtn {
+    width: 100%;
+  }
+}

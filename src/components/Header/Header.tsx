@@ -20,6 +20,13 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
         </button>
         <nav className={styles.nav}>
           <button 
+            onClick={() => onNavigate('home')} 
+            className={`${styles.navLink} ${currentPage === 'home' ? styles.active : ''}`}
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
+            Home
+          </button>
+          <button 
             onClick={() => onNavigate('about')} 
             className={`${styles.navLink} ${currentPage === 'about' ? styles.active : ''}`}
             style={{ background: 'none', border: 'none', cursor: 'pointer' }}

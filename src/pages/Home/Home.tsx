@@ -1,28 +1,27 @@
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Home/Home.module.css';
+import { HeroCard } from '../../components/Home/HeroCard';
+import { FeaturedProject } from '../../components/Home/FeaturedProject';
+import { CurrentFocus } from '../../components/Home/CurrentFocus';
+import { LanguagesBalance } from '../../components/Home/LanguagesBalance';
+import { ToolingEnvironment } from '../../components/Home/Tooling';
+import { LearningPipeline } from '../../components/Home/LearningPipeline';
+import { GithubActivity } from '../../components/Home/GithubActivity';
+import { MusicCard } from '../../components/Home/MusicCard';
 
 export function Home() {
   return (
     <main className={styles.container}>
-      <section className={styles.heroCard}>
-        <span className={styles.badge}>Systems Security Engineer</span>
-        <h1 className={styles.title}>Creating Secure and Resilient Systems</h1>
-        <p className={styles.description}>
-          I focus on building secure and resilient systems, leveraging my expertise in Rust, Golang, C++, and Python to deliver high-quality solutions.
-        </p>
-        <div className={styles.actions}>
-          <button className={styles.primaryBtn}>Contact Me</button>
-        </div>
-      </section>
+      <HeroCard />
 
-      <section className={styles.secondaryCard}>
-        <h2 className={styles.sectionTitle}>Main Stack</h2>
-        <div className={styles.tags}>
-          <span className={styles.tag}>Rust</span>
-          <span className={styles.tag}>Golang</span>
-          <span className={styles.tag}>C++</span>
-          <span className={styles.tag}>Python</span>
-        </div>
-      </section>
+      <div className={styles.grid}>
+        <FeaturedProject />
+        <CurrentFocus />
+        <LanguagesBalance />
+        <ToolingEnvironment />
+        <MusicCard />
+        <LearningPipeline />
+        <GithubActivity />
+      </div>
     </main>
   );
 }

@@ -1,0 +1,84 @@
+.focusGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.focusItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+}
+
+.focusHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.domainName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.targetRole {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+.techList {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  margin: 0.2rem 0 0 0;
+  line-height: 1.4;
+}
+
+.statusBadge {
+  font-size: 0.675rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.statusCore {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.statusActive {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+}
+
+.statusTarget {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+}
+
+.statusProgress {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+}
+
+.statusExpanding {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+}
+
+.statusExploratory {
+  background-color: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+}
+
+@media (max-width: 650px) {
+  .focusGrid {
+    grid-template-columns: 1fr;
+  }
+}

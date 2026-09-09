@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
-import styles from '../../styles/Home.module.css';
+import musicStyles from '../../styles/Home/Music.module.css';
+import homeStyles from '../../styles/Home/Home.module.css';
 
 interface TrackInfo {
   title: string;
@@ -8,10 +9,10 @@ interface TrackInfo {
   coverUrl?: string;
 }
 
+const DISCORD_USER_ID = '939851605111631903';
+
 export function MusicCard() {
   const [track, setTrack] = useState<TrackInfo | null>(null);
-
-  const DISCORD_USER_ID = '939851605111631903';
 
   const parseLanyardData = (data: any): TrackInfo | null => {
     if (!data) return null;
@@ -32,7 +33,7 @@ export function MusicCard() {
       );
 
       if (ytmActivity) {
-        let cover = undefined;
+        let cover: string | undefined = undefined;
         if (ytmActivity.assets?.large_image) {
           if (ytmActivity.assets.large_image.startsWith('mp:external/')) {
             cover = 'https://media.discordapp.net/' + ytmActivity.assets.large_image.replace('mp:', '');
@@ -54,7 +55,8 @@ export function MusicCard() {
   useEffect(() => {
     if (!DISCORD_USER_ID) return;
 
-    // HTTP Request
+    let heartbeatTimer: NodeJS.Timeout | null = null;
+
     fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`)
       .then((res) => res.json())
       .then((res) => {
@@ -64,57 +66,67 @@ export function MusicCard() {
       })
       .catch(() => setTrack(null));
 
-    // WebSocket Connection
     const ws = new WebSocket('wss://api.lanyard.rest/socket');
-
-    ws.onopen = () => {
-      ws.send(
-        JSON.stringify({
-          op: 2,
-          d: { subscribe_to_id: DISCORD_USER_ID },
-        })
-      );
-    };
 
     ws.onmessage = (event) => {
       try {
         const message = JSON.parse(event.data);
+
+        if (message.op === 1) {
+          const interval = message.d.heartbeat_interval;
+          heartbeatTimer = setInterval(() => {
+            if (ws.readyState === WebSocket.OPEN) {
+              ws.send(JSON.stringify({ op: 3 }));
+            }
+          }, interval);
+
+          ws.send(
+            JSON.stringify({
+              op: 2,
+              d: { subscribe_to_id: DISCORD_USER_ID },
+            })
+          );
+        }
+
         if (message.t === 'INIT_STATE' || message.t === 'PRESENCE_UPDATE') {
           setTrack(parseLanyardData(message.d));
         }
       } catch (err) {
-        // Parsing error
+
       }
     };
 
-    return () => ws.close();
-  }, [DISCORD_USER_ID]);
+    return () => {
+      if (heartbeatTimer) clearInterval(heartbeatTimer);
+      if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+        ws.close();
+      }
+    };
+  }, []);
 
   if (!track) return null;
 
   return (
-    <section className={styles.card}>
-      <span className={`${styles.boxBadge} ${styles.badgePeach}`}>On My Headphones</span>
-      
-      <div className={styles.musicHeader}>
-        <h2 className={styles.cardTitle}>Listening To</h2>
-        <span className={styles.liveIndicator}>
-          <span className={styles.pulseDot}></span> Now Playing
+    <section className={homeStyles.card}>
+      <div className={musicStyles.musicHeader}>
+        <h2 className={homeStyles.cardTitle}>Listening To</h2>
+        <span className={musicStyles.liveIndicator}>
+          <span className={musicStyles.pulseDot}></span> Now Playing
         </span>
       </div>
 
-      <div className={styles.musicBody}>
+      <div className={musicStyles.musicBody}>
         {track.coverUrl && (
           <img 
             src={track.coverUrl} 
             alt={`${track.title} cover`} 
-            className={styles.albumCover}
+            className={musicStyles.albumCover}
           />
         )}
-        <div className={styles.trackDetails}>
-          <span className={styles.trackTitle}>{track.title}</span>
-          <span className={styles.trackArtist}>{track.artist}</span>
-          {track.album && <span className={styles.trackAlbum}>{track.album}</span>}
+        <div className={musicStyles.trackDetails}>
+          <span className={musicStyles.trackTitle}>{track.title}</span>
+          <span className={musicStyles.trackArtist}>{track.artist}</span>
+          {track.album && <span className={musicStyles.trackAlbum}>{track.album}</span>}
         </div>
       </div>
     </section>
