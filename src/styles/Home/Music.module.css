@@ -83,3 +83,31 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--accent-color, #1db954);
+  transition: width 1s linear;
+}
+
+.timeInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  opacity: 0.7;
+}
