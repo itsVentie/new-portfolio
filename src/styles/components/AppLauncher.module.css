@@ -26,13 +26,26 @@
   top: calc(100% + 0.5rem);
   right: 0;
   width: 280px;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-main, 16px);
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+  border-radius: 20px;
   padding: 1rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   animation: fadeIn 0.15s ease;
+}
+
+.dropdown::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 16px; 
+  pointer-events: none;
+}
+
+[data-theme='dark'] .dropdown::before {
+  border-color: rgba(0, 0, 0, 0.20);
 }
 
 @keyframes fadeIn {
@@ -65,7 +78,7 @@
 }
 
 .appItem:hover {
-  background-color: var(--bg-color);
+  background-color: var(--bg-color, rgba(0, 0, 0, 0.04));
 }
 
 .appIcon {
