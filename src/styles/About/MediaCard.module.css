@@ -19,12 +19,14 @@
 
 
 .cardTitle {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1f2328;
-  margin: 0;
-  line-height: 1.2;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 1rem 0; 
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
+
 
 .interestsList {
   display: flex;
