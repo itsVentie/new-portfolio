@@ -7,10 +7,16 @@ interface AppItem {
   icon: string;
 }
 
-const APPS: AppItem[] = [
+const SOCIAL_APPS: AppItem[] = [
   { name: 'GitHub', url: 'https://github.com/itsVentie', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
   { name: 'Telegram', url: 'https://t.me/ventie', icon: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg' },
   { name: 'WakaTime', url: 'https://wakatime.com/@Ventie', icon: 'https://wakatime.com/static/img/wakatime.svg' },
+];
+
+const SITE_APPS: AppItem[] = [
+  { name: 'Ventie.dev', url: 'https://ventie.dev', icon: 'https://ventie.dev/favicon.ico' },
+  { name: 'Blog', url: 'https://blog.ventie.dev', icon: 'https://ventie.dev/favicon.ico' },
+  { name: 'Docs', url: 'https://docs.ventie.dev', icon: 'https://ventie.dev/favicon.ico' },
 ];
 
 export function AppLauncher() {
@@ -51,7 +57,24 @@ export function AppLauncher() {
       {isOpen && (
         <div className={styles.dropdown}>
           <div className={styles.grid}>
-            {APPS.map((app) => (
+            {SOCIAL_APPS.map((app) => (
+              <a
+                key={app.name}
+                href={app.url}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.appItem}
+              >
+                <img src={app.icon} alt={app.name} className={styles.appIcon} />
+                <span className={styles.appName}>{app.name}</span>
+              </a>
+            ))}
+          </div>
+
+          <div className={styles.divider} />
+
+          <div className={styles.grid}>
+            {SITE_APPS.map((app) => (
               <a
                 key={app.name}
                 href={app.url}
