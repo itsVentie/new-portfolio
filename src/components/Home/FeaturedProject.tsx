@@ -44,6 +44,20 @@ const PROJECTS_CONFIG: ProjectConfig[] = [
     fallbackDescription: 'Lightweight hybrid post-quantum proxy tunneling legacy traffic using X25519 and ML-KEM-768 (FIPS 203).',
     fallbackLanguage: 'Go',
   },
+  {
+    id: 'BEAMpool',
+    repo: 'itsVentie/BEAMpool',
+    status: 'Active',
+    fallbackDescription: 'Fault-tolerant EVM threat inspector built with Elixir and Rust.',
+    fallbackLanguage: 'Elixir',
+  },
+  {
+    id: 'HeatPINN',
+    repo: 'itsVentie/HeatPINN',
+    status: 'Completed',
+    fallbackDescription: 'Physics-Informed Neural Network (PINN) model in Julia for solving 1D Heat Equations.',
+    fallbackLanguage: 'Julia',
+  },
 ];
 
 const CACHE_KEY = 'github_data_cache_v1';
@@ -53,6 +67,7 @@ export function FeaturedProject() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [githubDataMap, setGithubDataMap] = useState<Record<string, GitHubData>>({});
   const [loading, setLoading] = useState<boolean>(true);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchGitHubData() {
@@ -148,15 +163,29 @@ export function FeaturedProject() {
   const selectedProjectConfig = PROJECTS_CONFIG.find((p) => p.id === selectedProjectId);
   const selectedGithubData = selectedProjectId ? githubDataMap[selectedProjectId] : null;
 
+  const displayedProjects = isExpanded ? PROJECTS_CONFIG : PROJECTS_CONFIG.slice(0, 3);
+
   return (
     <section className={`${homeStyles.card} ${homeStyles.spanTwo}`}>
-      <h2 className={homeStyles.cardTitle}>Featured Projects</h2>
-      <p className={homeStyles.description}>
-        Open-source security tooling, distributed systems, and scientific computing models.
-      </p>
+      <div className={projectsStyles.sectionHeader}>
+        <div>
+          <h2 className={homeStyles.cardTitle}>Featured Projects</h2>
+          <p className={homeStyles.description}>
+            Open-source security tooling, distributed systems, and scientific computing models.
+          </p>
+        </div>
+        {PROJECTS_CONFIG.length > 3 && (
+          <button
+            className={projectsStyles.moreBtn}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? 'Show Less ↑' : `More (${PROJECTS_CONFIG.length - 3}) ↓`}
+          </button>
+        )}
+      </div>
 
       <div className={projectsStyles.projectsGrid}>
-        {PROJECTS_CONFIG.map((project) => {
+        {displayedProjects.map((project) => {
           const ghData = githubDataMap[project.id];
           const projectTitle = ghData?.title || project.repo.split('/')[1];
           const displayDescription = ghData?.description || project.fallbackDescription || 'Loading project details...';
