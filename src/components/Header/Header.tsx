@@ -1,4 +1,6 @@
 import styles from '../../styles/components/Header.module.css';
+import { AppLauncher } from './AppLauncher/AppLauncher';
+import logoSvg from '../../assets/logos/fueki.svg';
 
 type Page = 'home' | 'about' | 'projects' | 'download' | 'contact';
 
@@ -21,10 +23,12 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
       <div className={styles.container}>
         <button 
           onClick={() => onNavigate('home')} 
-          className={styles.logo}
+          className={styles.logoBtn}
+          aria-label="Go to home"
         >
-          My portfolio
+          <img src={logoSvg} alt="Logo" className={styles.logoImg} />
         </button>
+
         <nav className={styles.nav}>
           {NAV_ITEMS.map((item) => (
             <button
@@ -36,6 +40,10 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
             </button>
           ))}
         </nav>
+
+        <div className={styles.rightGroup}>
+          <AppLauncher />
+        </div>
       </div>
     </header>
   );
