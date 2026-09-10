@@ -1,0 +1,44 @@
+.card {
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e1e4e8);
+  border-radius: var(--radius-main, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main, #1f2328);
+  margin: 0 0 1rem 0;
+}
+
+.langGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.langBadge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-main, #1f2328);
+  background-color: var(--bg-color, #f6f8fa);
+  border: 1px solid var(--border-color, #e1e4e8);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.langBadge:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+}
