@@ -9,10 +9,10 @@
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-main, 16px);
-  padding: 2rem;
+  padding: 1.75rem 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; 
+  align-items: center;
   gap: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   width: 100%;
@@ -21,12 +21,13 @@
 .leftColumn {
   display: flex;
   align-items: flex-start;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .avatarWrapper {
-  width: 120px;
-  height: 120px;
+  position: relative;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
 }
 
@@ -36,7 +37,7 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--card-bg);
+  border: 2px solid var(--border-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -54,7 +55,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .nameRow {
@@ -66,37 +67,88 @@
 
 .name {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.roleTag {
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-main);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1;
 }
 
 .username {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--accent-text, #0369a1);
   background-color: var(--accent-sky, #e0f2fe);
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 6px;
   line-height: 1;
 }
 
-.role {
-  margin: 0.1rem 0 0 0;
+.bio {
+  margin: 0.15rem 0 0 0;
   font-size: 0.875rem;
   color: var(--text-muted);
-  max-width: 400px;
-  line-height: 1.4;
+  max-width: 440px;
+  line-height: 1.45;
+}
+
+/* Перенос бейджей и ссылки на отдельные строки */
+.statsRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.statsBadgesGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.wakatimeBadgeLink {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.wakatimeBadgeLink img {
+  display: block;
+  height: 20px;
 }
 
 .boxesGroup {
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   flex-shrink: 0;
 }
 
@@ -105,12 +157,11 @@
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 1.4rem 1rem 1rem 1rem; 
+  padding: 1.25rem 0.85rem 0.85rem 0.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 210px;
-  margin-top: 0.25rem;
+  width: 200px;
 }
 
 .boxBadge {
@@ -153,7 +204,7 @@
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 0.35rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 6px;
   font-size: 0.775rem;
   font-weight: 500;
@@ -162,8 +213,8 @@
 }
 
 .socials {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 0.4rem;
   width: 100%;
 }
@@ -171,19 +222,26 @@
 .socialLink {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
   color: var(--text-main);
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 0.35rem 0.5rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 6px;
   font-size: 0.775rem;
   text-decoration: none;
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.emailBtn {
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
 }
 
 .socialLink:hover {
@@ -202,7 +260,7 @@
     align-items: flex-start;
     padding: 1.5rem;
   }
-  
+
   .boxesGroup {
     width: 100%;
     flex-direction: column;
@@ -211,48 +269,4 @@
   .box {
     width: 100%;
   }
-}
-
-.statsRow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.statBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  line-height: 1;
-}
-
-.wakatimeBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  line-height: 1;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.wakatimeBadge:hover {
-  color: var(--accent-text, #0369a1);
-  background-color: var(--accent-sky, #e0f2fe);
-  border-color: var(--accent-sky, #e0f2fe);
 }
