@@ -17,20 +17,25 @@
   align-items: center;
 }
 
-.logo {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--text-main);
+.logoBtn {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
   transition: opacity 0.2s ease;
 }
 
-.logo:hover {
+.logoBtn:hover {
   opacity: 0.75;
+}
+
+.logoImg {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .nav {
@@ -60,4 +65,10 @@
   background-color: var(--accent-sky);
   color: var(--accent-text);
   font-weight: 600;
+}
+
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
