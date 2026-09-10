@@ -107,26 +107,45 @@ export function ProfileHeader() {
 
         <div className={styles.boxesGroup}>
           <div className={styles.box}>
-            <span className={`${styles.boxBadge} ${styles.badgeLavender}`}>Stack</span>
-            <div className={styles.stackList}>
-              <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="14" height="14" />
-                C++
-              </span>
-              <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" alt="Rust" width="14" height="14" className={styles.rustIcon} />
-                Rust
-              </span>
-              <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Golang" width="14" height="14" />
-                Golang
-              </span>
-              <span className={styles.stackItem}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="14" height="14" />
-                Python
-              </span>
-            </div>
-          </div>
+  <span className={`${styles.boxBadge} ${styles.badgeLavender}`}>Stack</span>
+  <div className={styles.stackContainer}>
+    {/* Основные ЯП */}
+    <div className={styles.stackList}>
+      <span className={styles.stackItem}>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" width="14" height="14" />
+        C++
+      </span>
+      <span className={styles.stackItem}>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" alt="Rust" width="14" height="14" className={styles.rustIcon} />
+        Rust
+      </span>
+      <span className={styles.stackItem}>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Golang" width="14" height="14" />
+        Golang
+      </span>
+      <span className={styles.stackItem}>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="14" height="14" />
+        Python
+      </span>
+    </div>
+
+    <div className={styles.stackDivider} />
+
+    <div className={styles.stackList}>
+      <span className={styles.stackItem}>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" alt="Solidity" width="14" height="14" className={styles.solidityIcon} />
+        Solidity
+      </span>
+      <span className={styles.stackItem}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        Circom
+      </span>
+    </div>
+  </div>
+</div>
 
           <div className={styles.box}>
             <span className={`${styles.boxBadge} ${styles.badgeSky}`}>Links</span>

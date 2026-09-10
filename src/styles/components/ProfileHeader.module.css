@@ -211,6 +211,46 @@
   line-height: 1;
   white-space: nowrap;
 }
+.stackContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.stackList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.stackDivider {
+  height: 1px;
+  background-color: var(--border-color);
+  width: 100%;
+  margin: 0.1rem 0;
+}
+
+.stackItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.775rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .solidityIcon {
+  filter: invert(1);
+}
 
 .socials {
   display: flex;
